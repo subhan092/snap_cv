@@ -1,0 +1,28 @@
+datasource db {
+  provider  = "postgresql"
+}
+generator client {
+  provider = "prisma-client-js"
+}
+model User {
+  id        String @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  image     String?
+  resumes   Resume[]
+  isVerified  Boolean  @default(false)
+  verifyToken String?
+  createdAt DateTime @default(now())
+}
+
+model Resume {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  title     String
+  template  String   @default("modern")
+  content   Json     //  full resume data
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
