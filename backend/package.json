@@ -30,6 +30,9 @@
     "typescript": "^6.0.2"
   },
   "scripts": {
-    "dev": "nodemon --watch \"src/**/*.ts\" --exec \"npx ts-node\" src/index.ts"
+    "dev": "nodemon --watch \"src/**/*.ts\" --exec \"npx ts-node\" src/index.ts",
+    "postinstall": "prisma generate",
+    "build": "tsc",
+    "start": "node dist/index.js"
   }
 }
