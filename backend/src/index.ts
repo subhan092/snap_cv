@@ -6,16 +6,20 @@ import cookieParser from "cookie-parser";
 import resumeRouter from "./routes/resume.routes"
 
 dotenv.config();
-const ENV = process.env.NODE_ENV 
 
 
 const app = express();
 
 // middlewares
+const ENV = process.env.NODE_ENV || 'development';
+const CLIENT_URL = ENV === "production" 
+  ? process.env.CLIENT_PRODUCTION_URL 
+  : (process.env.CLIENT_URL || 'http://localhost:8080');
+
 app.use(cors({
-  origin: ENV === "production" ? process.env.CLIENT_PRODUCTION_URL : process.env.CLIENT_URL,  
-  credentials: true,                 
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  origin: CLIENT_URL,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(cookieParser())
