@@ -8,10 +8,10 @@ import generateEmailTemplate from "../utils/emailTemplate";
 import cloudinary from "../utils/cloudinary";
 import { AuthRequest } from "../../types/express";
 
-// ✅ ENV setup (default → production safe)
-const ENV = process.env.NODE_ENV || "production";
 
-// ✅ Reusable cookie config
+const ENV = process.env.NODE_ENV 
+
+//  Reusable cookie config
 const cookieOptions = {
   httpOnly: true,
   secure: ENV === "production",              // HTTPS in production
@@ -126,7 +126,7 @@ export const login = async (req: Request, res: Response) => {
 
     const { password: _, ...userWithoutPassword } = user;
 
-    // ✅ Set cookie
+    //  Set cookie
     res.cookie("token", token, cookieOptions);
 
     return res.status(200).json({

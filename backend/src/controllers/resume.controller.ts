@@ -106,7 +106,7 @@ export const updateResume = async (req: AuthRequest, res: Response) => {
   }
 };
 
-// ✅ Delete Resume
+//  Delete Resume
 export const deleteResume = async (req: AuthRequest, res: Response) => {
   try {
     const id = req.params.id as string;
